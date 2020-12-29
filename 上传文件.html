@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上传</title>
+  <style>
+    .bg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1920px;
+      height: 1080px;
+      background: url('./bg.jpg')no-repeat center / 100%;
+    }
+
+    .file1 {
+      display: none;
+    }
+
+    .img_one {
+      width: 300px;
+      height: 100px;
+    }
+  </style>
+  <script src="../jquery-1.11.1.min.js"></script>
+</head>
+
+<body>
+  <div class="bg">
+    <form name="form1" id="form1">
+      <p><input type="file" multiple="multiple" class="file1" name="file"></p>
+      <p><img src="./banner3.png" alt="" class="img_one"></p>
+      <p><button onclick=getData() type="button">提交</button></p>
+    </form>
+  </div>
+
+  <script>
+    const form1 = document.querySelector('#form1')
+    $(document).ready(function () {
+      $('.img_one').click(function () {
+        $('.file1').click()
+      })
+    })
+
+    function getData() {
+      const formdata = new FormData(form1);
+      $.ajax({
+        type: 'post',
+        url: 'http://localhost:8000/upload',
+        data: formdata,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          alert(data);
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>
